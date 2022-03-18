@@ -1,10 +1,10 @@
 from flask import Flask, jsonify
 from uuid import uuid4
 
-from src.mockserver.endpoints import ENDPOINTS
+from mockserver.endpoints import ENDPOINTS
 
 class MockServer():
-    def __init__(self, host="0.0.0.0", port=5000):
+    def __init__(self, host="0.0.0.0", port=5002):
         super().__init__()
         self.host = host
         self.port = port
@@ -22,10 +22,14 @@ class MockServer():
     def run(self):
         self.app.run(host=self.host, port=self.port, debug=True)
 
-if __name__ == "__main__":
+def main():
     app = MockServer()
 
     for endpoint in ENDPOINTS:
         app.add_endpoint(*endpoint)
 
     app.run()
+
+
+if __name__ == "__main__":
+    main()
