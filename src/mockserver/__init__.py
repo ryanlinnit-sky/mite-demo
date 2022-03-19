@@ -3,14 +3,22 @@ from uuid import uuid4
 
 from mockserver.endpoints import ENDPOINTS
 
-class MockServer():
+
+class MockServer:
     def __init__(self, host="0.0.0.0", port=5002):
         super().__init__()
         self.host = host
         self.port = port
         self.app = Flask(__name__)
 
-    def add_endpoint(self, url, response="Hello World", status_code=200, methods=("GET",), headers=None):
+    def add_endpoint(
+        self,
+        url,
+        response="Hello World",
+        status_code=200,
+        methods=("GET",),
+        headers=None,
+    ):
         def callback(**kwargs):
             body = response if isinstance(response, str) else jsonify(response)
             return (body, status_code, headers)
@@ -21,6 +29,7 @@ class MockServer():
 
     def run(self):
         self.app.run(host=self.host, port=self.port, debug=True)
+
 
 def main():
     app = MockServer()

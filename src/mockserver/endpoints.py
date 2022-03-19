@@ -1,4 +1,3 @@
-
 ENDPOINTS = [
     ("/url1", "Response from /url1", 200),
     ("/url2", "Response from /url2", 201),

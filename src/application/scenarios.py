@@ -12,9 +12,11 @@ def volume_model_factory(n):
 
 
 scenarios = [
-    (100, "application.journeys:get_url1_journey", None),
+    (5, "application.journeys:get_url1_journey", None),
     (1, "application.journeys:get_url2_journey", None),
     (1, "application.journeys:get_url3_journey", None),
+    (3, "application.journeys:post_url5_journey", None),
+    (10, "application.journeys:get_profile_journey", None),
     (1, "application.journeys:get_404_journey", None),
 ]
 
