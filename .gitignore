@@ -5,3 +5,4 @@ __pycache__/
 dist/
 
 collector_data/
+recorder_data/
