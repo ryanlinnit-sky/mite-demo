@@ -1,4 +1,4 @@
-mite-sky
+mite
 flask
 black
 flake8
