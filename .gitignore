@@ -6,3 +6,5 @@ dist/
 
 collector_data/
 recorder_data/
+
+nohup.out
