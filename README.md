@@ -2,7 +2,7 @@
 
 If you have [mite-cli](https://pypi.org/project/mite-cli/) installed, you can run: 
 ```bash
-mite-cli new my_project_dir -e
+mite-cli new my_project_dir
 ```
 
 Activate your new virtual environment and off you go.
