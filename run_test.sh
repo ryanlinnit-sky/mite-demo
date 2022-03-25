@@ -4,7 +4,7 @@
 docker-compose -f provisioning/docker_compose.yml up -d
 
 # Start the mockserver
-nohup mockserver &
+mockserver -d
 
 # Start the mite components
 mite runner --controller-socket=tcp://127.0.0.1:14301 --message-socket=tcp://127.0.0.1:14302 &

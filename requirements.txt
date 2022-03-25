@@ -2,3 +2,5 @@ mite
 flask
 black
 flake8
+psutil
+docopt

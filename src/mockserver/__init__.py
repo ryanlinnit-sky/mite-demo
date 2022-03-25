@@ -1,14 +1,14 @@
-from flask import Flask, jsonify
 from uuid import uuid4
 
-from mockserver.endpoints import ENDPOINTS
+from flask import Flask, jsonify
 
 
 class MockServer:
-    def __init__(self, host="0.0.0.0", port=5002):
+    def __init__(self, host="0.0.0.0", port=5002, debug=False):
         super().__init__()
         self.host = host
         self.port = port
+        self.debug = debug
         self.app = Flask(__name__)
 
     def add_endpoint(
@@ -28,17 +28,4 @@ class MockServer:
         self.app.add_url_rule(url, view_func=callback, methods=methods)
 
     def run(self):
-        self.app.run(host=self.host, port=self.port, debug=True)
-
-
-def main():
-    app = MockServer()
-
-    for endpoint in ENDPOINTS:
-        app.add_endpoint(*endpoint)
-
-    app.run()
-
-
-if __name__ == "__main__":
-    main()
+        self.app.run(host=self.host, port=self.port, debug=self.debug)
