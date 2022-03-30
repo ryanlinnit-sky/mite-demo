@@ -15,6 +15,7 @@ import contextlib
 import logging
 import os
 import subprocess
+import sys
 
 import psutil
 from docopt import docopt
@@ -31,7 +32,7 @@ def run_daemon():
         cmd = ["mockserver"]
 
         _env = os.environ
-        _env["WERKZEUG_RUN_MAIN"] = "true"
+        _env["MOCKSERVER_DAEMON"] = "true"
 
         proc = subprocess.Popen(cmd, stdin=None, stdout=None, stderr=None, env=_env)
         logger.info(f"Spawned mockserver with {proc.pid=}")
@@ -68,9 +69,10 @@ def stop_daemon():
 
 
 def setup_logging(opts):
-    if os.environ.get("WERKZEUG_RUN_MAIN"):
-        werkzeug_logger = logging.getLogger("werkzeug")
-        werkzeug_logger.setLevel(logging.ERROR)
+    if os.environ.get("MOCKSERVER_DAEMON"):
+        logging.getLogger("werkzeug").disabled = True
+        cli = sys.modules["flask.cli"]
+        cli.show_server_banner = lambda *x: None
     else:
         logging.basicConfig(
             level=opts["--log-level"], format="<%(levelname)s> %(message)s", force=True,

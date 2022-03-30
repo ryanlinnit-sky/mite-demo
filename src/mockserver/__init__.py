@@ -27,5 +27,11 @@ class MockServer:
 
         self.app.add_url_rule(url, view_func=callback, methods=methods)
 
+    def remove_endpoint(self, url):
+        self.app.url_map.pop(url)
+
+    def remove_all_endpoints(self):
+        self.app.url_map = {}
+
     def run(self):
         self.app.run(host=self.host, port=self.port, debug=self.debug)
