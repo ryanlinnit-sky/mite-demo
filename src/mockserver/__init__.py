@@ -20,7 +20,19 @@ class MockServer:
         headers=None,
     ):
         def callback(**kwargs):
-            body = response if isinstance(response, str) else jsonify(response)
+            if isinstance(response, str):
+                body = response
+            else:
+                # Format the response body
+                substituted_response = dict(
+                    zip(
+                        response.keys(),
+                        [value.format(**kwargs) for value in response.values()],
+                    )
+                )
+
+                body = jsonify(substituted_response)
+
             return (body, status_code, headers)
 
         callback.__name__ = str(uuid4())

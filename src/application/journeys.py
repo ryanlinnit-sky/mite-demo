@@ -27,10 +27,11 @@ async def post_url5_journey(ctx):
     await app.post_url5()
 
 
+# A journey that uses a datapool
 @mite_http
-async def get_profile_journey(ctx):
+async def get_profile_journey(ctx, user_id):
     app = ApplicationAPI(ctx)
-    await app.get_profile()
+    await app.get_profile(user_id)
 
 
 @mite_http

@@ -1,5 +1,7 @@
 from mite.scenario import StopScenario
 
+from application.datapools import user_ids
+
 
 def volume_model_factory(n, duration=60 * 5):
     def vm(start, end):
@@ -16,7 +18,7 @@ scenarios = [
     (1, "application.journeys:get_url2_journey", None),
     (1, "application.journeys:get_url3_journey", None),
     (3, "application.journeys:post_url5_journey", None),
-    (2, "application.journeys:get_profile_journey", None),
+    (2, "application.journeys:get_profile_journey", user_ids),
     (1, "application.journeys:get_404_journey", None),
 ]
 
