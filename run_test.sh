@@ -10,9 +10,22 @@ else
     TEST=$1
 fi
 
+OS=${uname -s}
 
-# Start grafana and prometheus docker containers
-docker-compose -f provisioning/docker_compose.yml up -d
+case "$OS" in
+    Darwin)
+        # Start grafana and prometheus docker containers
+        docker-compose -f provisioning/docker_compose_mac.yml up -d
+        ;;
+    Linux)
+        # Start grafana and prometheus docker containers
+        docker-compose -f provisioning/docker_compose_linux.yml up -d
+        ;;
+    *)
+        echo "Unsupported OS: $OS"
+        exit 1
+        ;;
+esac
 
 # Start the mockserver
 mockserver -d
