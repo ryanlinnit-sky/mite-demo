@@ -17,7 +17,9 @@ class ApplicationAPI:
 
     async def post_url5(self):
         async with self.ctx.transaction("post url5"):
-            return await self.ctx.http.post(f"{self._base_url}/url5")
+            return await self.ctx.http.post(
+                f"{self._base_url}/url5", json={"test": 123}
+            )
 
     async def get_profile(self):
         async with self.ctx.transaction("get_profile"):

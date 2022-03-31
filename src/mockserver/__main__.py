@@ -6,6 +6,7 @@ Usage:
 Options:
     -d --daemon             Run the mockserver as a daemon
     -s --stop               Stop a running mockserver daemon
+    -p --port=PORT          Port to listen on [default: 5002]
     --log-level=LEVEL       Set logger level: DEBUG, INFO, WARNING, ERROR, CRITICAL [default: INFO]
 
 """  # noqa: E501
@@ -27,9 +28,9 @@ _PID_FILE = "/tmp/mockserver.pid"
 logger = logging.getLogger(__name__)
 
 
-def run_daemon():
+def run_daemon(port):
     def spawn_mockserver():
-        cmd = ["mockserver"]
+        cmd = ["mockserver", "-p", port]
 
         _env = os.environ
         _env["MOCKSERVER_DAEMON"] = "true"
@@ -85,11 +86,11 @@ def main():
     setup_logging(opts)
 
     if opts["--daemon"]:
-        run_daemon()
+        run_daemon(opts["--port"])
     elif opts["--stop"]:
         stop_daemon()
     else:
-        app = MockServer()
+        app = MockServer(port=opts["--port"])
 
         for endpoint in ENDPOINTS:
             app.add_endpoint(*endpoint)
