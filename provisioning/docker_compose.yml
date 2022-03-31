@@ -12,6 +12,8 @@ services:
               "--web.console.libraries=/usr/share/prometheus/console_libraries",
               "--web.console.templates=/usr/share/prometheus/consoles",
               "--storage.tsdb.retention.size=5GB"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # To allow it to work on Linux
   grafana:
     build:
       context: .
