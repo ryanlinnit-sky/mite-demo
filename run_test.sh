@@ -10,7 +10,7 @@ else
     TEST=$1
 fi
 
-OS=${uname -s}
+OS=$(uname -s)
 
 case "$OS" in
     Darwin)
