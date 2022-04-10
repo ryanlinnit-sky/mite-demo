@@ -10,6 +10,12 @@ else
     TEST=$1
 fi
 
+# Check if docker is running
+if ! docker ps -q > /dev/null 2>&1; then
+    echo "Docker is not running, please start docker and try again"
+    exit 1
+fi
+
 OS=$(uname -s)
 
 case "$OS" in
